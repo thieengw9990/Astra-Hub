@@ -10,7 +10,7 @@ or place == 4442272183
 or place == 122478697296975 
 or universe == 994732206 then
     
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/karedskibidi/ThieenHuB/refs/heads/main/BloxFruits/Premium/LXY"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/Scripts/Bloxfruits"))()
 
 -- 🟩 DeadRail
 elseif place == 4520749081 or universe == 3101667897 then
