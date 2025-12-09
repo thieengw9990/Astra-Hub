@@ -1,0 +1,231 @@
+-- ============ VOLCANO & DELTA EXECUTOR - OPTIMIZED ============
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+
+local Player = game.Players.LocalPlayer
+local HttpService = game:GetService("HttpService")
+local RunService = game:GetService("RunService")
+local CoreGui = game:GetService("CoreGui")
+
+-- ============ CONFIG ============
+local CONFIG = {
+    SERVER_URL = "https://gist.githubusercontent.com/karedskibidi/ce17c6b4aba5da52885502b9dfa9e885/raw/2b51f9cedf0f2bc986565ec823ab7bed2826af34/Key",
+    MAIN_SCRIPT = "",
+    MAX_RETRIES = 3,
+    VERSION = "1.3.0",
+    CACHE_TIME = 300
+}
+
+local CACHE = { ip = nil, data = nil, expires = 0 }
+
+-- ============ LOGGING ============
+local function log(msg, typ)
+    typ = typ or "INFO"
+    local prefix = { INFO = "ℹ️", SUCCESS = "✅", WARN = "⚠️", ERROR = "❌" }
+    print(string.format("[%s] [%s] %s", os.date("%H:%M:%S"), typ, msg))
+end
+
+-- ============ UI NOTIFY ============
+local function notify(title, msg, duration)
+    duration = duration or 3
+    local gui = Instance.new("ScreenGui", CoreGui)
+    gui.Name = "Notif_" .. os.time()
+    gui.ResetOnSpawn = false
+    
+    local frame = Instance.new("Frame", gui)
+    frame.Size = UDim2.new(0, 280, 0, 70)
+    frame.Position = UDim2.new(0.5, -140, 0, 15)
+    frame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+    frame.BorderSizePixel = 0
+    
+    local titleLabel = Instance.new("TextLabel", frame)
+    titleLabel.Size = UDim2.new(1, 0, 0, 25)
+    titleLabel.BackgroundColor3 = Color3.fromRGB(40, 130, 255)
+    titleLabel.BorderSizePixel = 0
+    titleLabel.Text = title
+    titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    titleLabel.TextSize = 14
+    titleLabel.Font = Enum.Font.GothamBold
+    
+    local msgLabel = Instance.new("TextLabel", frame)
+    msgLabel.Size = UDim2.new(1, -15, 0, 35)
+    msgLabel.Position = UDim2.new(0, 8, 0, 28)
+    msgLabel.BackgroundTransparency = 1
+    msgLabel.Text = msg
+    msgLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
+    msgLabel.TextSize = 12
+    msgLabel.Font = Enum.Font.Gotham
+    msgLabel.TextWrapped = true
+    
+    task.wait(duration)
+    gui:Destroy()
+end
+
+-- ============ CORE FUNCTIONS ============
+local function executeAsync(func)
+    return pcall(func)
+end
+
+local function getIP()
+    if CACHE.ip then return CACHE.ip end
+    
+    local ips = { "https://api.ipify.org", "https://icanhazip.com", "https://ifconfig.me" }
+    for _, url in ipairs(ips) do
+        local ok, ip = executeAsync(function() return game:HttpGet(url, true) end)
+        if ok and ip and ip ~= "" then
+            ip = ip:gsub("%s+", "")
+            CACHE.ip = ip
+            return ip
+        end
+        task.wait(0.2)
+    end
+    
+    log("Failed to fetch IP", "ERROR")
+    return nil
+end
+
+local function loadData(retries)
+    retries = retries or 0
+    if CACHE.data and os.time() < CACHE.expires then
+        log("Using cached data", "INFO")
+        return CACHE.data
+    end
+    if retries >= CONFIG.MAX_RETRIES then
+        log("Failed to load data", "ERROR")
+        return nil
+    end
+    
+    local ok, data = executeAsync(function()
+        return HttpService:JSONDecode(game:HttpGet(CONFIG.SERVER_URL, true))
+    end)
+    
+    if not ok then
+        log("Retrying... (" .. (retries + 1) .. "/" .. CONFIG.MAX_RETRIES .. ")", "WARN")
+        task.wait(1)
+        return loadData(retries + 1)
+    end
+    
+    CACHE.data = data
+    CACHE.expires = os.time() + CONFIG.CACHE_TIME
+    return data
+end
+
+local function loadMainScript()
+    local ok, result = executeAsync(function()
+        return game:HttpGet(CONFIG.MAIN_SCRIPT, true)
+    end)
+    
+    if not ok or not result or result == "" then
+        log("Failed to download main script", "ERROR")
+        return false
+    end
+    
+    local loadOk = executeAsync(function() return loadstring(result)() end)
+    return loadOk
+end
+
+local function validateData(data)
+    if not data or not data.success then return false, "Invalid data" end
+    if not data.keys or type(data.keys) ~= "table" then return false, "Keys invalid" end
+    return true, "Valid"
+end
+
+-- ============ AUTO REJOIN ============
+local scriptRunning = true
+
+local function autoRejoin()
+    spawn(function()
+        Player.Parent:WaitForChild("CharacterRemoving"):Connect(function()
+            if scriptRunning then
+                log("Disconnected! Rejoining...", "WARN")
+                notify("Disconnected", "Auto-rejoining...", 3)
+                task.wait(2)
+                game:GetService("TeleportService"):Teleport(game.PlaceId)
+            end
+        end)
+        
+        Player:GetPropertyChangedSignal("Parent"):Connect(function()
+            if not Player.Parent and scriptRunning then
+                log("Player kicked! Rejoining...", "ERROR")
+                notify("Kicked", "Auto-rejoining...", 3)
+                task.wait(2)
+                game:GetService("TeleportService"):Teleport(game.PlaceId)
+            end
+        end)
+    end)
+end
+
+-- ============ MAIN EXECUTION ============
+log("========== v" .. CONFIG.VERSION .. " ==========", "INFO")
+
+-- KEY VALIDATION
+local UserKey = getgenv().Key or ""
+if UserKey == "" then
+    log("No key provided", "WARN")
+    notify("Error", "No key!", 5)
+    Player:Kick("[KEY] Set key: getgenv().Key = 'KEY_HERE'")
+    return
+end
+
+log("Key: " .. string.sub(UserKey, 1, 4) .. "****", "INFO")
+
+-- IP DETECTION
+log("Getting IP...", "INFO")
+local UserIP = getIP()
+if not UserIP then
+    log("IP detection failed", "ERROR")
+    notify("Error", "Cannot get IP", 5)
+    Player:Kick("[KEY] IP detection failed!")
+    return
+end
+log("IP: " .. UserIP, "SUCCESS")
+
+-- SERVER SYNC
+log("Loading data...", "INFO")
+local data = loadData()
+local valid, msg = validateData(data)
+if not valid then
+    log("Server validation failed: " .. msg, "ERROR")
+    notify("Error", msg, 5)
+    Player:Kick("[KEY] " .. msg)
+    return
+end
+log("Data validated", "SUCCESS")
+
+-- KEY CHECK
+local keyinfo = data.keys[UserKey]
+if not keyinfo then
+    log("Invalid key", "ERROR")
+    notify("Error", "Invalid key", 5)
+    Player:Kick("[KEY] Invalid key!")
+    return
+end
+log("Key verified", "SUCCESS")
+
+-- IP CHECK & LOCK
+if keyinfo.ip and keyinfo.ip ~= "" and keyinfo.ip ~= UserIP then
+    log("IP mismatch", "ERROR")
+    notify("Error", "IP mismatch", 5)
+    Player:Kick("[KEY] IP mismatch: " .. UserIP .. " vs " .. keyinfo.ip)
+    return
+elseif not keyinfo.ip or keyinfo.ip == "" then
+    log("Locking IP...", "INFO")
+    notify("Locking", "IP locking...", 2)
+else
+    log("IP OK", "SUCCESS")
+    notify("Success", "Access granted!", 2)
+end
+
+-- SETUP AUTO REJOIN
+autoRejoin()
+
+-- LOAD MAIN SCRIPT
+log("Loading main script...", "INFO")
+if loadMainScript() then
+    log("========== SUCCESS ==========", "SUCCESS")
+    notify("Success", "Script loaded!", 2)
+else
+    log("Script load failed", "ERROR")
+    notify("Error", "Script failed", 5)
+    scriptRunning = false
+    Player:Kick("[KEY] Script load failed")
+end
