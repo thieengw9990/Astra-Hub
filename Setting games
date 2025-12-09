@@ -1,0 +1,34 @@
+repeat task.wait() until game:IsLoaded()
+
+local place = game.PlaceId
+local universe = game.GameId
+
+-- 🟦 BLOX FRUITS
+if place == 7449423635 
+or place == 2753915549 
+or place == 4442272183 
+or place == 122478697296975 
+or universe == 994732206 then
+    
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/karedskibidi/ThieenHuB/refs/heads/main/BloxFruits/Premium/LXY"))()
+
+-- 🟩 DeadRail
+elseif place == 4520749081 or universe == 3101667897 then
+    loadstring(game:HttpGet("King Legacy"))()
+
+-- 🟨 StealaBrainrot
+elseif place == 8304191830 then
+    loadstring(game:HttpGet("Soon"))()
+
+-- 🟥 99Nights
+elseif place == 6284583030 or universe == 3282284566 then
+    loadstring(game:HttpGet("Soon"))()
+
+-- 🟪 PlantvsBrainrot
+elseif place == 13775256536 then
+    loadstring(game:HttpGet("Soon"))()
+
+-- Không hỗ trợ
+else
+    game.Players.LocalPlayer:Kick("Script does not support this game.")
+end
