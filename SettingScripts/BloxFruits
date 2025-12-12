@@ -1951,8 +1951,8 @@ end
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local Window = Fluent:CreateWindow({
-    Title = "Astra Hub",
-    SubTitle = "",
+    Title = "Astra Hub Premium [Blox Fruits]",
+    SubTitle = "By White",
     TabWidth = 155,
     Size = UDim2.fromOffset(485, 370),
     Acrylic = false,
@@ -1962,63 +1962,63 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({
         Title = "Farm",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     Settings = Window:AddTab({
         Title = "Config",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     Melee = Window:AddTab({
         Title = "Fighting Style",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     Quests = Window:AddTab({
         Title = "Items Farm",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     New = Window:AddTab({
         Title = "New Events",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     SeaEvent = Window:AddTab({
         Title = "Sea Events",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     Mirage = Window:AddTab({
         Title = "Mirage + RaceV4",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     Drago = Window:AddTab({
         Title = "Drago Dojo",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     Prehistoric = Window:AddTab({
         Title = "Prehistoric",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     Raids = Window:AddTab({
         Title = "Raid",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     Combat = Window:AddTab({
         Title = "Combat PVP",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     Travel = Window:AddTab({
         Title = "Teleport",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     Fruit = Window:AddTab({
         Title = "Fruits",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     Shop = Window:AddTab({
         Title = "Shop",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     }),
     Misc = Window:AddTab({
         Title = "Misc",
-        Icon = ""
+        Icon = "http://www.roblox.com/asset/?id="
     })
 }
 local FarmLevel = Tabs.Main:AddToggle("FarmLevel", {
@@ -3935,7 +3935,7 @@ AuraSkin = function(HakiID)
 end;
 VaildColor = function(Part)
     if Part and Part.BrickColor then
-        return (tostring(Part.BrickColor) == "Lime black")
+        return (tostring(Part.BrickColor) == "Lime green")
     end;
 end;
 HakiCalculate = function(Part)
