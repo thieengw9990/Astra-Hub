@@ -1,1 +1,1 @@
-https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/Setting%20games
+loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/5c416c28167ec6ee9051edf5c83bd362bf5a7c4d1b3e63fe37fd4a1620a06ede/download"))()
