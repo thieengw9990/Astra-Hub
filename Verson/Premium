@@ -1,0 +1,31 @@
+--- Premium Script
+    local HttpService = game:GetService("HttpService")
+
+local UniverseID
+pcall(function()
+    UniverseID = HttpService:JSONDecode(
+        game:HttpGet(
+            "https://apis.roblox.com/universes/v1/places/"
+            .. game.PlaceId .. "/universe"
+        )
+    ).universeId
+end)
+
+if game.PlaceId == 6969696969696 then
+    loadstring(game:HttpGet(""))()
+
+elseif game.PlaceId == 67676767676767 or game.PlaceId == 363636363636 then
+    loadstring(game:HttpGet(""))()
+
+elseif game.PlaceId == 2753915549 
+    or game.PlaceId == 4442272183 
+    or game.PlaceId == 7449423635 
+    or UniverseID == 994732206 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/Scripts/Bloxfruits"))()
+
+elseif UniverseID == 1508150815081508 then
+    loadstring(game:HttpGet(""))()
+
+else
+    loadstring(game:HttpGet("https://example.com/default.lua"))()
+end
