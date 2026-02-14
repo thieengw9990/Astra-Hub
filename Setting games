@@ -10,31 +10,23 @@ end
 
 local place = game.PlaceId
 
-if place == 1111111111 then
+if place == 2753915549 
+or place == 4442272183 
+or place == 7449423635 then
 
     getgenv().Key = getgenv().Key
-    loadstring(game:HttpGet("LINK_GAME_1"))()
+    loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/5c416c28167ec6ee9051edf5c83bd362bf5a7c4d1b3e63fe37fd4a1620a06ede/download"))()
 
-elseif place == 2222222222 then
-
-    getgenv().Key = getgenv().Key
-    loadstring(game:HttpGet("LINK_GAME_2"))()
-
-elseif place == 3333333333 then
+elseif place == 0000000000 then
 
     getgenv().Key = getgenv().Key
-    loadstring(game:HttpGet("LINK_GAME_3"))()
+    loadstring(game:HttpGet("Soon"))()
 
-elseif place == 4444444444 then
-
-    getgenv().Key = getgenv().Key
-    loadstring(game:HttpGet("LINK_GAME_4"))()
-
-elseif place == 5555555555 then
+elseif place == 0000000000 then
 
     getgenv().Key = getgenv().Key
-    loadstring(game:HttpGet("LINK_GAME_5"))()
+    loadstring(game:HttpGet("Soon"))()
 
 else
-    warn("Not Support This Game")
+    warn("The game was found not to be on the list of supported games")
 end
