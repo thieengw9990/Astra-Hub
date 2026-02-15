@@ -9,4 +9,4 @@ As you can see, our script is a modern and popular script, easy to use worldwide
 ```lua
 repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer
 getgenv().Key = "PASTE_KEY_HERE"   --- your key have and paste in "PASTE_KEY_HERE"  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/AstraXHubMain.lua"))()  --- Or Link https://pastefy.app/GrFGvwTe/raw
+loadstring(game:HttpGet("https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/AstraXHubMain.lua"))() --// Or https://astraxhubsite.neocities.org/script/main/astraxhub-main
