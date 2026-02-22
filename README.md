@@ -1,9 +1,10 @@
-# Why not use the more common key system (GUI screen)?
-As you can see, our script is a modern and popular script, easy to use worldwide for Lua scripting users. This allows us to optimize the script and save on product costs! If you have any concerns or are not satisfied with anything, please feel free to contact us or leave a comment for our feedback!
+# When will the free key be available for use?
+On holidays and important days like World Day, the development team will provide free working keys (normally for 2-3 days, with each key containing 3 HWIDs for use on multiple machines and operating for a few hours) - and the reason why the keys don't work indefinitely is actually quite perplexing and concerning to us, as it's primarily for economic reasons to maintain the script's operation and development. Therefore, we will continue to apply this policy, similar to some paid scripts currently on the market.
 # What's in the new update?
 ## Version: 1.5
-- Fixed ButtonImage
-- Fixed Error run script on executor
+- Three new script types have been added
+- 2 scripts are currently in testing and development
+- Fix some basic errors in the script
 ### See more in Discord
 # Where is the script?
 ```lua
