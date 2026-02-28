@@ -4,12 +4,10 @@ local PlaceId = game.PlaceId
 local HttpService = game:GetService("HttpService")
 
 local GameScripts = {
-    [2753915549] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/BloxFruits_v1.lua",
-    [4442272183] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/BloxFruits_v1.lua",
-    [7449423635] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/BloxFruits_v1.lua",
-    
-    [4520749081] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/KingLegacy_v1.lua",
-    
+    [2753915549] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/GameHub/BloxFruits",
+    [4442272183] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/GameHub/BloxFruits",
+    [7449423635] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/GameHub/BloxFruits",
+    ---// loading Universal
     ["Universal"] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/AstraXHubMain.lua"
 }
 
@@ -29,3 +27,4 @@ if not success then
         loadstring(game:HttpGet(GameScripts["Universal"]))()
     end
 end
+
