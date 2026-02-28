@@ -8,7 +8,7 @@ local GameScripts = {
     [4442272183] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/GameHub/BloxFruits",
     [7449423635] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/GameHub/BloxFruits",
     ---// loading Universal
-    ["Universal"] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/AstraXHubMain.lua"
+    ["Universal"] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/GameHub/unknown-game"
 }
 
 local scriptUrl = GameScripts[PlaceId] or GameScripts["Universal"]
@@ -27,4 +27,5 @@ if not success then
         loadstring(game:HttpGet(GameScripts["Universal"]))()
     end
 end
+
 
