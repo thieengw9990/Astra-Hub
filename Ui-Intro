@@ -1,4 +1,4 @@
--- [[ OBFKING VIP PRO V5 ]] --
+-- [[ OBFKING BETA ]] --
 
 return(function(...)
     local _cache = { [0x01] = getfenv, [0x02] = loadstring, [0x03] = unpack or table.unpack };
