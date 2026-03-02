@@ -27,6 +27,3 @@ if not success then
         loadstring(game:HttpGet(GameScripts["Universal"]))()
     end
 end
-
-
-
