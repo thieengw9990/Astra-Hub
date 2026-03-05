@@ -7,9 +7,7 @@ local GameScripts = {
     [2753915549] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/GameHub/BloxFruits.lua",
     [4442272183] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/GameHub/BloxFruits.lua",
     [7449423635] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/GameHub/BloxFruits.lua",
-    
     [131623223084840] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/GameHub/Escape-Tsunami-For-Brainrots.lua",
-    
     ["Universal"] = "https://raw.githubusercontent.com/thieengw9990/Astra-Hub/refs/heads/main/GameHub/unknown-game"
 }
 
@@ -29,3 +27,4 @@ if not success then
         loadstring(game:HttpGet(GameScripts["Universal"]))()
     end
 end
+
